@@ -1,18 +1,19 @@
-// async function that will call these two functions and return an object
+// Await and async
 import { uploadPhoto, createUser } from './utils';
 
-export default async function asyncUploadUser() {
+const asyncUploadUser = async () => {
+  let photo;
+  let user;
+
   try {
-    const photo = await uploadPhoto();
-    const user = await createUser();
-    return {
-      photo,
-      user,
-    };
-  } catch (error) {
-    return {
-      photo: null,
-      user: null,
-    };
+    photo = await uploadPhoto();
+    user = await createUser();
+  } catch (e) {
+    photo = null;
+    user = null;
   }
-}
+
+  return ({ photo, user });
+};
+
+export default asyncUploadUser;
